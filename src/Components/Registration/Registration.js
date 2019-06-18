@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
+import Header from '../Header/Header'
 
 class Registration extends Component {
     constructor() {
@@ -24,7 +25,7 @@ class Registration extends Component {
         this.setState({password: e.target.value})
     }
 
-    registerUser(e) {
+    registerUser() {
         axios
         .post('/artist/register', {username: this.state.username, password: this.state.password})
         .then(() => this.setState({redirect: true}))
@@ -40,6 +41,7 @@ class Registration extends Component {
 
         return (
             <div className='register'>
+                <Header/>
                 <h3>Create a New Account!</h3>
                 <div>
                     Username

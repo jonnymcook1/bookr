@@ -8,9 +8,11 @@ const initialState = {
 const GET_USER = 'GET_USER'
 
 export function getUser() {
+    console.log('hit')
+    let user = axios.get('/artist/user').then(response => response.data)
     return {
         type: GET_USER,
-        payload: axios.get('/artist/user').catch(err => err)
+        payload: user
     }
 }
 
@@ -21,7 +23,7 @@ export default function reducer(state=initialState, action) {
             return{
                 ...state,
                 loading: false,
-                user: action.payload.data
+                user: action.payload
             }
         case `${GET_USER}_PENDING`:
             return{

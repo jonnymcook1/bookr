@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getUser} from '../../redux/reducer'
 import {Redirect} from "react-router-dom"
+import Header from '../Header/Header'
 
 class Dashboard extends Component {
     constructor() {
@@ -26,6 +27,7 @@ class Dashboard extends Component {
 
         return (
             <div className='dashboard'>
+                <Header/>
                 <h3>Artist Dashboard</h3>
             </div>
         )

@@ -3,7 +3,7 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const {registerUser, loginUser, getUser, logout} = require('./controllers/authController')
-const {createArtist} = require('./controllers/artistController')
+const {createArtist, getArtist} = require('./controllers/artistController')
 
 const app = express()
 
@@ -18,7 +18,8 @@ app.use(
         saveUninitialization: true,
         cookies: {
             maxAge: 1000 * 60 * 60 * 24 * 7
-        }
+        },
+        user: {}
     })
 )
 
@@ -30,6 +31,7 @@ app.post('/artist/logout', logout)
 
 // Artist
 app.post('/artist/form', createArtist )
+app.get('/artist/:id', getArtist)
 
 massive(process.env.CONNECTION_STRING).then(db => {
     app.set('db', db)
