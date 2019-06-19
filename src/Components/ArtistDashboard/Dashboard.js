@@ -17,6 +17,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        console.log(this.props.user)
         if(!this.props.user) {
             this.setState({redirect: true});
         }
@@ -35,7 +36,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = reduxState => {
-    const {user} = reduxState;
+    const {user} = reduxState.reducer;
     return{
         user
     }

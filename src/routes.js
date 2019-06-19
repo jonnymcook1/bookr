@@ -14,6 +14,6 @@ export default (
         <Route path='/register' component={Registration} />
         <Route path='/artist/form' component={ArtistForm}  />
         <Route path='/dashboard' component={Dashboard} />
-        <Route path='/artist' component={Profile} />
+        <Route path='/artist/:id' component={Profile} />
     </Switch>
 )
