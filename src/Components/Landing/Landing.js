@@ -7,7 +7,7 @@ class Landing extends Component {
         return(
             <div className='landing'>
                <Header/>
-               <h2>Landing</h2>
+               <h2>Where the show begins</h2>
             </div>
         )
     }
