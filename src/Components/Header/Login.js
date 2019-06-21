@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux';
+import {login} from '../../redux/reducer'
 import {Redirect} from 'react-router-dom'
-import Header from './Header';
 
 class Login extends Component {
     constructor(){
@@ -25,6 +26,10 @@ class Login extends Component {
         this.setState({password: e.target.value})
     }
 
+    // login() {
+    //     this.props.login(this.state.username, this.state.password)
+    // }
+
     login() {
         axios
         .post('/artist/login', {username: this.state.username, password: this.state.password})
@@ -32,15 +37,25 @@ class Login extends Component {
         .catch(() => {alert('login Unsuccessful')})
     }
 
-    render() {
 
+    // login() {
+    //     axios
+    //     .post('/artist/login', {username: this.state.username, password: this.state.password})
+    //     .then((event_id) => {
+    //         this.props.updateEventId(event_id)
+    //         this.setState({redirect: true})
+    //     })
+    //     .catch(() => {alert('login Unsuccessful')})
+    // }
+
+    render() {
+        console.log(this.props)
         if(this.state.redirect){
             alert('Login successful!')
             return <Redirect to='/dashboard' />
         }
         return (
             <div className='login'>
-                <Header/>
                 <h3>Login</h3>
                 <div>
                     Username
@@ -55,4 +70,11 @@ class Login extends Component {
     }
 }
 
-export default Login
+const mapStateToProps = reduxState => {
+    const {user} = reduxState.reducer 
+    return {
+        user
+    } 
+}
+
+export default connect(mapStateToProps, {login})(Login)

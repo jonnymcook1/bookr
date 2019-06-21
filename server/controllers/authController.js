@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 
 module.exports = {
     registerUser: async (req, res) => {
-        console.log(req.body)
+        // console.log(req.body)
         const {username, password} = req.body
         const db = req.app.get('db')
 
@@ -28,7 +28,7 @@ module.exports = {
     },
 
     loginUser: async (req, res) => {
-        console.log(req.body)
+        // console.log(req.body)
         const {username, password} = req.body
         const db = req.app.get('db')
 
@@ -42,18 +42,21 @@ module.exports = {
             if(!hash){
                 res.status(403).json({error: 'Username or password is incorrect'});
             } else {
-                req.session.user = {
+                 req.session.user = {
                     username: user[0].username,
-                    user_id: user[0].user_id
+                    user_id: user[0].user_id,
+                    // event: event[0] ? event[0].event_id : null
                 }
                 res.status(200).json(req.session.user)
             };
         }
         
+        
     },
-
+    
+    // const event = await db.event(user[0].user_id)
     getUser: (req, res) => {
-  console.log(req.session.user)
+//   console.log(req.session.user)
         if(req.session.user){
             res.status(200).json(req.session.user)
         }else {

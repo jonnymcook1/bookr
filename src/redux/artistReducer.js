@@ -16,8 +16,9 @@ const initialState = {
 const GET_ARTIST='GET_ARTIST';
 
 export function getArtist(id) {
-    let artist = axios.get(`/artist/${id}`).then(response => response.data)
-    return{
+    console.log(id)
+    let artist = axios.get(`/artist/?id=${id}`).then(response => response.data)
+    return {
         type: GET_ARTIST,
         payload: artist
     }

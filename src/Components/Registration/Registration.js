@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
-import Header from '../Header/Header'
-
 
 class Registration extends Component {
     constructor() {
@@ -44,7 +42,6 @@ class Registration extends Component {
 
         return (
             <div className='register'>
-                <Header/>
                 <div>
                 Username
                 <input onChange={this.handleUsername} placeholder='Username' />

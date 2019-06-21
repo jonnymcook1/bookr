@@ -1,4 +1,3 @@
-SELECT * FROM artist
-JOIN users
-ON users.user_id = artist.users_id
-WHERE users.user_id = $1
+SELECT * FROM artist 
+JOIN event ON event.artist_id = artist.artist_id 
+WHERE artist.users_id = $1

@@ -3,7 +3,6 @@ import axios from 'axios';
 import {connect} from 'react-redux'
 import {getUser} from '../../redux/reducer'
 import {Redirect} from 'react-router-dom'
-import Header from '../Header/Header';
 
 class ArtistForm extends Component {
     constructor() {
@@ -52,7 +51,6 @@ class ArtistForm extends Component {
 
         return(
             <div className='artist_form'>
-                <Header/>
                 <form className='artistForm'>
                     Name
                     <input name='artist_name' value={artist_name} onChange={this.handleChange} placeholder='Name' />

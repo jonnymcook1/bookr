@@ -4,6 +4,7 @@ const massive = require('massive')
 const session = require('express-session')
 const {registerUser, loginUser, getUser, logout} = require('./controllers/authController')
 const {createArtist, getArtist} = require('./controllers/artistController')
+const {createEvent, getEvent} = require('./controllers/eventController')
 
 const app = express()
 
@@ -31,7 +32,11 @@ app.post('/artist/logout', logout)
 
 // Artist
 app.post('/artist/form', createArtist )
-app.get('/artist/:id', getArtist)
+app.get('/artist/', getArtist)
+
+// Event
+app.post('/event/form', createEvent)
+app.get('/event/request/:id', getEvent)
 
 massive(process.env.CONNECTION_STRING).then(db => {
     app.set('db', db)

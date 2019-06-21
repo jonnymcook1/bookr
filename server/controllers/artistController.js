@@ -9,24 +9,17 @@ module.exports = {
 
     getArtist: async (req, res) => {
         const db = req.app.get('db')
+        console.log(req.session.user)
+
         
-        const user = await db.get_artist(req.params.id)
-        if(user[0]){
-            console.log(user[0])
-            res.status(200).json(user[0])}
+        const user = await db.get_artist(req.query.id || req.session.user.user_id)
+        console.log(user)
+        if(user){
+            // console.log(user[0])
+            res.status(200).json(user)}
 
         else{
             res.status(500).send({error:'Error'});
         }
-    }
-
-    // getArtist: (req, res) => {
-    //     console.log(req.session.user)
-    //           if(req.params.id){
-    //               res.status(200).json(req.params.id)
-    //           }else {
-    //               res.status(401).json({error: 'Please log in'})
-    //           }
-    //       }
-      
+    } 
 }

@@ -12,8 +12,8 @@ import {
     NavLink } from 'reactstrap';
 
 class Header extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
           username: '',
           password: '',
@@ -51,19 +51,25 @@ class Header extends Component {
     login() {
         axios
         .post('/artist/login', {username: this.state.username, password: this.state.password})
-        .then(() => this.setState({redirect: true}))
-        .catch(() => {alert('login Unsuccessful')})
+        .then(() => this.setState({modal: !this.state.modal, redirect: true}))
+        // .then(() => this.props.history.push('/dashboard'))
+        .catch(err => {alert(err, 'login Unsuccessful')})
     }
 
     render() {
-
-      if(this.state.redirect){
-        alert('Login successful!')
-        return <Redirect to='/dashboard' />
-      }
+      console.log(this.props)
+    
 
         return (
             <div className='header'>
+                {this.state.redirect ?
+                  <>
+                    {alert('Login successful!')}
+                    <Redirect to='/dashboard' />
+                  </>
+                  :
+                  null
+                }
                 <Navbar color="light" light expand="md">
                   <NavbarBrand href="/">bookr</NavbarBrand>
                   <NavbarToggler onClick={this.toggle} />
