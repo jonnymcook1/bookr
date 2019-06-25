@@ -13,11 +13,12 @@ class Dashboard extends Component {
     constructor() {
         super()
         this.state = {
+            updateShows: true,
             redirect: false,
             user: [],
             artist: [],
-            accepted: null,
-
+            accepted: false,
+            
         }
     }
 
@@ -35,7 +36,7 @@ class Dashboard extends Component {
     }
 
     acceptRequest(event_id) {
-        this.setState({accepted: !this.state.accepted},() => {
+        this.setState({accepted: !this.state.accepted, updateShows: !this.state.updateShows },() => {
             console.log(event_id)
             axios
             .put(`/event/accepted/${event_id}`, {accepted: this.state.accepted})
@@ -112,7 +113,7 @@ class Dashboard extends Component {
                     </tbody>
                 </Table>
                 <br/>
-                <Shows/>
+                <Shows toRefresh={this.state.updateShows}/>
             </div>
         )
     }

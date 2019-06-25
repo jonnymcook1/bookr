@@ -4,7 +4,6 @@ import {getArtist} from '../../redux/artistReducer'
 import EventForm from '../Event/EventForm'
 // import axios from 'axios';
 
-
 class Profile extends Component {
     constructor() {
         super()
@@ -33,7 +32,9 @@ class Profile extends Component {
                     <h2>{this.props.artist[0].description}</h2>
                     </div>
                 </div>
+                <div>
                 <EventForm artist={this.props.artist[0]} />
+                </div>
             </div>
             :
             null

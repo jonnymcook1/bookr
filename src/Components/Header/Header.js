@@ -3,7 +3,7 @@ import axios from 'axios'
 import {withRouter} from 'react-router'
 import {Link, Redirect} from 'react-router-dom' 
 import {connect} from 'react-redux'
-import {getUser, login} from '../../redux/reducer'
+import {getUser, login, logout} from '../../redux/reducer'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {
     Collapse,
@@ -28,6 +28,7 @@ class Header extends Component {
         this.handleUsername=this.handleUsername.bind(this)
         this.handlePassword=this.handlePassword.bind(this)
         this.login=this.login.bind(this)
+        this.logout=this.logout.bind(this)
         this.toggle = this.toggle.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
     }
@@ -55,72 +56,75 @@ class Header extends Component {
     login() { 
         axios
         .post('/artist/login', {username: this.state.username, password: this.state.password})
-        .then(() => this.setState({modal: !this.state.modal}))
+        .then(() => {this.setState({modal: !this.state.modal})
+        this.setState({login: !this.state.login})})
         .then(() => {this.props.getUser()})
         .catch(err => {alert(err, 'login Unsuccessful')})
     }
-
-    componentDidMount() {
-    //   if(this.state.login) {
-    //     this.props.history.push(`/dashboard/${this.props.user.user_id}`)
-    //   } else {
-    //     console.log(this.state)
-    //   }
+    
+    logout() {
+      axios
+      .post('/artist/logout')
+      .then(res => {
+        console.log(res.status)
+        // this.props.logout()
+        
+      })
+      .then(() => {this.props.logout()})
+      .then(() => this.setState({login: false}))
+      .then(() => {this.props.history.push('/')})
     }
 
     render() {
-      // if(this.props.user.user_id){
-      //   return (
-      //     <>
-      //       {alert('Login successful!')}
-      //       <Redirect to={`/dashboard/${this.props.user.user_id}`} />
-      //     </>
-      //   )
-      //   // this.props.history.push(`/dashboard/${this.props.user.user_id}`)
-      // } else {
-      //   console.log(this.props)
-      // }
+      console.log(this.props.user)
+      const {login} = this.state
+
 
         return (
-            <div className='header'>
-                {this.props.user.user_id ?
-                  <>
-                    <Redirect to={`/dashboard/${this.props.user.user_id}`} />
-                  </>
-                  :
-                  null
-                }
-                <Navbar color="light" light expand="md">
-                  <NavbarBrand href="/">bookr</NavbarBrand>
-                  <NavbarToggler onClick={this.toggle} />
-                  <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                      <NavItem>
-                        <Link to='/register'><NavLink>Artist Registration</NavLink></Link>
-                      </NavItem>
-                      <NavItem>
-                      <Button color="secondary" onClick={this.toggleModal}>{this.props.buttonLabel}Login</Button>
-                        <Modal isOpen={this.state.modal} toggleModal={this.toggleModal} className={this.props.className}>
-                          <ModalHeader toggleModal={this.toggleModal}>Login to artist account</ModalHeader>
-                          <ModalBody>
-                            <div>
-                            Username:
-                            <input onChange={this.handleUsername} placeholder='Username' />
-                            <br/>
-                            Password: 
-                            <input onChange={this.handlePassword} placeholder='Password' type='password' />
-                            </div>
-                            </ModalBody>
-                          <ModalFooter>
-                        <Button color="secondary" onClick={() => {this.login()}}>Go to Dashboard</Button>{' '}
-                        <Button color="outline-danger" onClick={this.toggleModal}>Cancel</Button>
-                      </ModalFooter>
-                      </Modal>
-                     </NavItem>
-                   </Nav>
-                  </Collapse>
-                </Navbar>
-            </div>
+          <div className='header'>
+              {this.props.user.user_id ?
+                <>
+                  <Redirect to={`/dashboard/${this.props.user.user_id}`} />
+                </>
+                :
+               <Redirect to='/'/>
+
+              }
+              <Navbar color="light" light expand="md">
+                <NavbarBrand href="/">bookr</NavbarBrand>
+                <NavbarToggler onClick={this.toggle} />
+                <Collapse isOpen={this.state.isOpen} navbar>
+                  <Nav className="ml-auto" navbar>
+                    <NavItem>
+                      <Link to='/register'><NavLink>Artist Registration</NavLink></Link>
+                    </NavItem>
+                    <NavItem>
+                      {login ? (
+                        <Button color="secondary" onClick={this.logout}>Logout</Button>
+                        ) : (
+                        <Button color="secondary" onClick={this.toggleModal}>{this.props.buttonLabel}Login</Button>
+                      )}  
+                      <Modal isOpen={this.state.modal} toggleModal={this.toggleModal} className={this.props.className}>
+                        <ModalHeader toggleModal={this.toggleModal}>Login to artist account</ModalHeader>
+                        <ModalBody>
+                          <div>
+                          Username:
+                          <input onChange={this.handleUsername} placeholder='Username' />
+                          <br/>
+                          Password: 
+                          <input onChange={this.handlePassword} placeholder='Password' type='password' />
+                          </div>
+                          </ModalBody>
+                        <ModalFooter>
+                      <Button color="secondary" onClick={() => {this.login()}}>Go to Dashboard</Button>{' '}
+                      <Button color="outline-danger" onClick={this.toggleModal}>Cancel</Button>
+                    </ModalFooter>
+                    </Modal>
+                    </NavItem>
+                  </Nav>
+                </Collapse>
+              </Navbar>
+          </div>
         )
     }
 }
@@ -134,4 +138,4 @@ const mapStateToProps= reduxState => {
   }
 }
 
-export default connect(mapStateToProps, {getUser, login})(withRouter(Header));
+export default connect(mapStateToProps, {getUser, login, logout})(withRouter(Header));

@@ -11,6 +11,10 @@ class Shows extends Component {
     }
 
     componentDidMount() {
+      this.refreshList();
+    }
+    
+    refreshList() {
       axios
       .get('/shows')
       .then(response => {console.log(response.data)
@@ -18,6 +22,11 @@ class Shows extends Component {
       })
     }
 
+    componentDidUpdate(prevProps) {
+      if(prevProps !== this.props) {
+        this.refreshList();
+      }
+    }
     render() {
       let {shows} = this.state
       let displayShows = shows.map(show => {

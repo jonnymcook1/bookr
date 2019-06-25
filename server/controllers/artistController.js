@@ -22,5 +22,14 @@ module.exports = {
         // else{
         //     res.status(500).send({error:'Error'});
         // }
-    } 
+    },
+
+    getGenre: (req, res) => {
+        const db = req.app.get('db')
+        const {genre} = req.params
+
+         db.get_genre(genre)
+         .then(response => res.status(200).json(response))
+         .catch(error => res.status(500).send(`getGenre: ${error}`))
+    }
 }
