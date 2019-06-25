@@ -14,6 +14,33 @@ module.exports = {
         db.get_event(id)
             .then(response => res.status(200).json(response))
             .catch(error => res.status(500).send(`getEvent: ${error}`))
+    },
+
+    acceptedEvent: (req, res) => {
+        console.log(req.params)
+        console.log(req.body)
+        const db = req.app.get('db')
+        const {event_id} = req.params
+        
+        db.accepted_event(event_id)
+            .then(response => res.status(200).json(response))
+            .catch(error => res.status(500).send(`acceptedEvent: ${error}`))
+    }, 
+
+    deleteEvent: (req, res) => {
+        const db = req.app.get('db')
+
+        db.deleteEvent(req.params.id)
+            .then(response => res.status(200).json(response))
+            .catch(error => res.status(500).send(`deleteEvent: ${error}`))
+    },
+
+    getShow: (req, res) => {
+        const db = req.app.get('db')
+
+        db.get_show()
+            .then(response => res.status(200).json(response))
+            .catch(error => res.status(500).send(`getShow: ${error}`))
     }
- 
+
 }

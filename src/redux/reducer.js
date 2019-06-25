@@ -32,7 +32,9 @@ export default function reducer(state=initialState, action) {
             return{
                 ...state,
                 loading: false,
-                user: action.payload
+                user: action.payload,
+                login: true
+
             }
         case `${GET_USER}_PENDING`:
             return{

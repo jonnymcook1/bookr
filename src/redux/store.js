@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import reducer from './reducer';
 import artistReducer from './artistReducer';
 import eventReducer from './eventReducer'
@@ -8,4 +8,6 @@ let reducers = combineReducers({
     reducer, artistReducer, eventReducer
 })
 
-export default createStore(reducers, applyMiddleware(promise))
+const devTools = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : null;
+
+export default createStore(reducers, compose(applyMiddleware(promise), devTools))

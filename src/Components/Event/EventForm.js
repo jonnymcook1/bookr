@@ -81,12 +81,12 @@ class EventForm extends Component {
         <Col>
         <FormGroup>
           <Label for="exampleText">Event Time</Label>
-          <Input type="time" name="date" onChange={this.handleChange} id="exampleText" />
+          <Input type="time" name="time" onChange={this.handleChange} id="exampleText" />
         </FormGroup>
         </Col>
         <FormGroup>
           <Label for="exampleText">Event Duration(hrs)</Label>
-          <Input type="number" name="date" onChange={this.handleChange} id="exampleText" />
+          <Input type="number" name="duration" onChange={this.handleChange} id="exampleText" />
         </FormGroup>
         </Row>
         </Col>

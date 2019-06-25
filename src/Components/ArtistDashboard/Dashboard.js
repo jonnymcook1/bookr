@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
+import Shows from '../Event/Shows'
 import {connect} from 'react-redux'
 import {getUser} from '../../redux/reducer'
 import {getArtist} from '../../redux/artistReducer'
-import {getEvent, updateEventId} from '../../redux/eventReducer'
+import {getEvent} from '../../redux/eventReducer'
 import {Redirect} from "react-router-dom"
+import { Table, Button } from 'reactstrap';
 import axios from 'axios'
 
 
@@ -13,28 +15,58 @@ class Dashboard extends Component {
         this.state = {
             redirect: false,
             user: [],
-            artist: []
+            artist: [],
+            accepted: null,
+
         }
     }
 
+
+
     componentDidMount() {
+        this.props.getUser()
         console.log(this.props.user)
         axios
-            .get('/artist/')
+            .get('/artist')
             .then(response => {
                 console.log(response.data)
                 this.setState({artist: response.data})
             })
-        
-        //  this.setState({user: this.props.user}, ()=> {this.props.getArtist(this.props.user_id)}, ()=>{ this.props.getEvent(this.props.artist.artist_id)} )
-       
-       
-
     }
+
+    acceptRequest(event_id) {
+        this.setState({accepted: !this.state.accepted},() => {
+            console.log(event_id)
+            axios
+            .put(`/event/accepted/${event_id}`, {accepted: this.state.accepted})
+            .then((res) => {console.log(res.data)
+                this.artist()})
+            .catch(err => {alert(err, 'Not accepted')})    
+        })
+    }
+
+    deleteEvent(event_id) {
+        console.log(event_id)
+        axios
+        .delete(`/event/delete/${event_id}`)
+        .then((res) => {console.log(res.data)
+            this.artist()})
+        .catch(err => {alert(err, 'Did not Delete')})
+    }
+
+    artist() {
+        axios
+        .get('/artist')
+        .then(response => {
+            console.log(response.data)
+            this.setState({artist: response.data})
+        })
+    }
+ 
 
 
     render() {
-        console.log(this.state.user)
+        console.log(this.props)
 
         if(!this.state.user) {
             this.setState({redirect: true});
@@ -44,12 +76,43 @@ class Dashboard extends Component {
             return <Redirect to='/' />
         }
 
+        let {artist} = this.state
+        let displayRequest = artist.map(artist => {
+            return (
+                <tr key={artist.artist_id}>
+                    <td>{artist.event_name}</td>
+                    <td>{artist.venue_name}</td>
+                    <td>{artist.city},{artist.state}</td>
+                    <td>{artist.event_date}/{artist.event_time}</td>
+                    <td>${artist.booking_price}</td>
+                    <td>
+                        <Button onClick={() => this.acceptRequest(artist.event_id)}>Accept</Button>
+                        <Button color='danger' onClick={() => this.deleteEvent(artist.event_id)}>Decline</Button>
+                    </td>
+                </tr>
+            )
+        })
+
         return (
             <div className='dashboard'>
-                <h3>Artist Dashboard</h3>
-                <div className='bookingRequest'>
-                    <h1>{this.props.event.event_name}</h1>
-                </div>
+            <h4>Event Request</h4>
+                <Table dark>
+                    <thead>
+                    <tr>
+                        <th>Event</th>  
+                        <th>Venue</th>
+                        <th>Location</th>
+                        <th>Date/Time</th>
+                        <th>Offer</th>
+                        <th>Accept/Decline</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {displayRequest}
+                    </tbody>
+                </Table>
+                <br/>
+                <Shows/>
             </div>
         )
     }
@@ -57,14 +120,13 @@ class Dashboard extends Component {
 
 const mapStateToProps = reduxState => {
     const {user} = reduxState.reducer;
-    const {event, event_id} = reduxState.eventReducer;
+    const {event} = reduxState.eventReducer;
     const {artist} = reduxState.artistReducer
     return{
         user,
         event,
         artist,
-        event_id
     }
 }
 
-export default connect(mapStateToProps, {getArtist, getEvent, updateEventId, getUser})(Dashboard)
+export default connect(mapStateToProps, {getArtist, getEvent, getUser})(Dashboard)

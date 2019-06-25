@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux'
 import {getUser} from '../../redux/reducer'
 import {Redirect} from 'react-router-dom'
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class ArtistForm extends Component {
     constructor() {
@@ -47,30 +48,60 @@ class ArtistForm extends Component {
             return <Redirect to='/login' />
         }
 
-        const {artist_name, genre, description, image_url, insta_url, fb_url, spotify_url, email} = this.state
+        const {artist_name, genre, description, image_url, insta_url, spotify_url, email} = this.state
 
         return(
             <div className='artist_form'>
-                <form className='artistForm'>
-                    Name
-                    <input name='artist_name' value={artist_name} onChange={this.handleChange} placeholder='Name' />
-                    Genre
-                    <input name='genre' value={genre}onChange={this.handleChange} placeholder='Genre' />
-                    Description
-                    <input name='description' value={description} onChange={this.handleChange} placeholder='Artist Description' />
-                         <img className='profilePic' src={image_url} alt='artist' />
-                    Image
-                    <input type='text' name='image_url' value={image_url} onChange={this.handleChange} placeholder='Image URL' />
-                    Facebook
-                    <input name='fb_url' value={fb_url} onChange={this.handleChange} placeholder='Facebook URL' />
-                    Instagram
-                    <input name='insta_url' value={insta_url} onChange={this.handleChange} placeholder='Instagram URL' />
-                    Spotify
-                    <input name='spotify_url' value={spotify_url} onChange={this.handleChange} placeholder='Spotify URL' />
-                    Email
-                    <input name='email' value={email} onChange={this.handleChange} placeholder='Email Address' />
-                    <button onClick={this.artistForm}>Submit</button>
-                </form>
+                <Form>
+        <FormGroup row>
+          <Label for="exampleEmail" sm={2}>Name</Label>
+          <Col sm={10}>
+            <Input type="text" name='artist_name' value={artist_name} onChange={this.handleChange} />
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label for="examplePassword" sm={2}>Genre</Label>
+          <Col sm={10}>
+            <Input name='genre' value={genre}onChange={this.handleChange}/>
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label for="exampleSelect" sm={2}>Artist Description</Label>
+          <Col sm={10}>
+            <Input type="textarea" name='description' value={description} onChange={this.handleChange}/>
+          </Col>
+        </FormGroup>
+        <img className='profilePic' src={image_url} alt='artist' />
+        <FormGroup row>
+          <Label for="exampleSelect" sm={2}>Upload Image</Label>
+          <Col sm={10}>
+            <Input type='url' name='image_url' value={image_url} onChange={this.handleChange}/>
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label for="exampleSelect" sm={2}>Instagram</Label>
+          <Col sm={10}>
+            <Input type="url" name='insta_url' value={insta_url} onChange={this.handleChange}/>
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label for="exampleSelect" sm={2}>Instagram</Label>
+          <Col sm={10}>
+            <Input type='url' name='spotify_url' value={spotify_url} onChange={this.handleChange}/>
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label for="exampleSelect" sm={2}>Email</Label>
+          <Col sm={10}>
+            <Input type='email' name='email' value={email} onChange={this.handleChange} />
+          </Col>
+        </FormGroup>
+        <FormGroup check row>
+          <Col sm={{ size: 10, offset: 5 }}>
+            <Button onClick={this.artistForm} >Submit</Button>
+          </Col>
+        </FormGroup>
+      </Form>
             </div>
         )
     }

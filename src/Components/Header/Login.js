@@ -3,6 +3,7 @@ import axios from 'axios'
 import {connect} from 'react-redux';
 import {login} from '../../redux/reducer'
 import {Redirect} from 'react-router-dom'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class Login extends Component {
     constructor(){
@@ -26,10 +27,6 @@ class Login extends Component {
         this.setState({password: e.target.value})
     }
 
-    // login() {
-    //     this.props.login(this.state.username, this.state.password)
-    // }
-
     login() {
         axios
         .post('/artist/login', {username: this.state.username, password: this.state.password})
@@ -37,16 +34,6 @@ class Login extends Component {
         .catch(() => {alert('login Unsuccessful')})
     }
 
-
-    // login() {
-    //     axios
-    //     .post('/artist/login', {username: this.state.username, password: this.state.password})
-    //     .then((event_id) => {
-    //         this.props.updateEventId(event_id)
-    //         this.setState({redirect: true})
-    //     })
-    //     .catch(() => {alert('login Unsuccessful')})
-    // }
 
     render() {
         console.log(this.props)
@@ -57,14 +44,18 @@ class Login extends Component {
         return (
             <div className='login'>
                 <h3>Login</h3>
-                <div>
-                    Username
-                    <input onChange={this.handleUsername} placeholder="Username"/>
-                    Password
-                    <input onChange={this.handlePassword} placeholder="Password"/>
-                </div>
-                <button onClick={this.login}>Login</button>
-                
+                <Form inline>
+                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Label for="exampleEmail" className="mr-sm-2">Username</Label>
+                        <Input type="text" onChange={this.handleUsername} />
+                        </FormGroup>
+                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Label for="examplePassword" className="mr-sm-2">Password</Label>
+                        <Input type="password" onChange={this.handlePassword} />
+                        </FormGroup>
+                        <Button onClick={this.login} >Submit</Button>
+                    </Form>
+
             </div>
         )
     }

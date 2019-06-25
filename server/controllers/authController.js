@@ -10,6 +10,7 @@ module.exports = {
 
         if(foundUser[0]){
             res.status(403).json({error: 'Username taken '})
+            return
         } 
 
         const salt = bcrypt.genSaltSync(10)
@@ -22,6 +23,7 @@ module.exports = {
                 username: regUser[0].username,
                 user_id: regUser[0].user_id
             }
+            console.log(req.session.user)
             res.status(200).json(req.session.user)
         }
             
@@ -54,9 +56,8 @@ module.exports = {
         
     },
     
-    // const event = await db.event(user[0].user_id)
     getUser: (req, res) => {
-//   console.log(req.session.user)
+  console.log(req.session.user)
         if(req.session.user){
             res.status(200).json(req.session.user)
         }else {

@@ -4,7 +4,7 @@ module.exports = {
         const {artist_name, users_id, genre, description, image_url, insta_url, fb_url, spotify_url, email} = req.body
         const artist = await req.app.get('db').create_artist(artist_name, users_id, genre, description, image_url, insta_url, fb_url, spotify_url, email)
 
-        res.status(200).json(artist)
+        return res.status(200).json(artist)
     },
 
     getArtist: async (req, res) => {
@@ -12,14 +12,15 @@ module.exports = {
         console.log(req.session.user)
 
         
-        const user = await db.get_artist(req.query.id || req.session.user.user_id)
-        console.log(user)
-        if(user){
+        const user = await db.get_artist(req.session.user.user_id || req.query.id)
+        // console.log(req.query.id)
+        console.log(req.session.user)
+        // if(user){
             // console.log(user[0])
-            res.status(200).json(user)}
+            return res.status(200).send(user) 
 
-        else{
-            res.status(500).send({error:'Error'});
-        }
+        // else{
+        //     res.status(500).send({error:'Error'});
+        // }
     } 
 }

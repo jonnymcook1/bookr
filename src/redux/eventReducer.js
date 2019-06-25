@@ -15,12 +15,10 @@ const initialState = {
     country: '',
     price: 0,
     event: [],
-    event_id: 0,
     loading: false
 }
 
 const GET_EVENT='GET_EVENT';
-const UPDATE_EVENT_ID='UPDATE_EVENT_ID'
 
 export function getEvent(artist_id) {
   
@@ -32,18 +30,10 @@ export function getEvent(artist_id) {
     }
 }
 
-export function updateEventId(event_id) {
-    return {
-        type: UPDATE_EVENT_ID,
-        payload: event_id
-    }
-}
 
 export default function reducer(state=initialState, action) {
   
     switch(action.type) {
-        case UPDATE_EVENT_ID:
-            return Object.assign({}, state, {event_id: action.payload});
         case  `${GET_EVENT}_FULFILLED`:
             return{
                 ...state,

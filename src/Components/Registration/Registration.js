@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {Redirect} from 'react-router-dom'
 
 class Registration extends Component {
@@ -43,13 +44,25 @@ class Registration extends Component {
         return (
             <div className='register'>
                 <div>
-                Username
-                <input onChange={this.handleUsername} placeholder='Username' />
-                <br/>
-                Password: 
-                <input onChange={this.handlePassword} placeholder='Password' type='password' />
-                </div>
-                <button onClick={this.registerUser}>Register</button>
+                    <Form inline>
+                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Label for="exampleEmail" className="mr-sm-2">Username</Label>
+                        <Input type="text" onChange={this.handleUsername} />
+                        </FormGroup>
+                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Label for="examplePassword" className="mr-sm-2">Password</Label>
+                        <Input type="password" onChange={this.handlePassword} />
+                        </FormGroup>
+                        <Button onClick={this.registerUser} >Submit</Button>
+                    </Form>
+                </div>    
+                {/* // Username
+                // <input onChange={this.handleUsername} placeholder='Username' />
+                // <br/>
+                // Password: 
+                // <input onChange={this.handlePassword} placeholder='Password' type='password' />
+                // </div>
+                // <button onClick={this.registerUser}>Register</button> */}
             </div>
         )
     }

@@ -15,11 +15,11 @@ class Profile extends Component {
 
     componentDidMount() {
         this.props.getArtist(this.props.match.params.id)
-        // console.log(this.props.match.params)
+        console.log(this.props.match.params)
     }
 
     render() {
-        console.log(this.props.artist)
+        console.log(this.props)
         return (
             <div>
             {this.props.artist.length
@@ -30,7 +30,6 @@ class Profile extends Component {
                     <div className='info'>
                     <h1>{this.props.artist[0].artist_name}</h1>
                     <img className='profilePic' src={this.props.artist[0].image_url} alt='artist' />
-                    <br/>
                     <h2>{this.props.artist[0].description}</h2>
                     </div>
                 </div>

@@ -4,13 +4,18 @@ const massive = require('massive')
 const session = require('express-session')
 const {registerUser, loginUser, getUser, logout} = require('./controllers/authController')
 const {createArtist, getArtist} = require('./controllers/artistController')
-const {createEvent, getEvent} = require('./controllers/eventController')
+const {createEvent, getEvent, acceptedEvent, deleteEvent, getShow} = require('./controllers/eventController')
 
 const app = express()
 
 let {SERVER_PORT, SESSION_SECRET}= process.env
 
 app.use(express.json())
+
+massive(process.env.CONNECTION_STRING).then(db => {
+    app.set('db', db)
+    console.log('Database Connected')
+})
 
 app.use(
     session({
@@ -32,16 +37,15 @@ app.post('/artist/logout', logout)
 
 // Artist
 app.post('/artist/form', createArtist )
-app.get('/artist/', getArtist)
+app.get('/artist', getArtist)
 
 // Event
 app.post('/event/form', createEvent)
+app.put('/event/accepted/:event_id', acceptedEvent)
+app.delete('/event/delete/:id', deleteEvent)
 app.get('/event/request/:id', getEvent)
+app.get('/shows', getShow)
 
-massive(process.env.CONNECTION_STRING).then(db => {
-    app.set('db', db)
-    console.log('Database Connected')
-})
 
 app.listen(SERVER_PORT, () => {
     console.log(`Server listening on port ${SERVER_PORT}`)
