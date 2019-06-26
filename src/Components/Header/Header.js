@@ -3,6 +3,7 @@ import axios from 'axios'
 import {withRouter} from 'react-router'
 import {Link, Redirect} from 'react-router-dom' 
 import {connect} from 'react-redux'
+import {SocialIcon} from 'react-social-icons'
 import {getUser, login, logout} from '../../redux/reducer'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {
@@ -91,10 +92,12 @@ class Header extends Component {
 
               }
               <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">bookr</NavbarBrand>
+                <NavbarBrand id='brand' href="/">bookr</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
+                    <NavItem id='instaHead' ><SocialIcon url='https://www.instagram.com/johncook1/' style={{ height: 25, width: 25 }} bgColor="#6c757d"/></NavItem>
+                    <NavItem id='fbHead' ><SocialIcon url='https://www.facebook.com/profile.php?id=100006264817028' style={{ height: 25, width: 25 }} bgColor="#6c757d"/></NavItem>
                     <NavItem>
                       <Link to='/register'><NavLink>Artist Registration</NavLink></Link>
                     </NavItem>

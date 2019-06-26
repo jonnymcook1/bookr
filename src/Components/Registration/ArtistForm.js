@@ -27,7 +27,7 @@ class ArtistForm extends Component {
     }
 
     componentDidMount() {
-        this.props.getUser()
+        // this.props.getUser()
     }
 
     artistForm = (e) => {
@@ -35,14 +35,14 @@ class ArtistForm extends Component {
         // console.log(this.props.user)
         const {artist_name, genre, description, image_url, insta_url, fb_url, spotify_url, email} = this.state
         axios
-        .post('/artist/form', {artist_name: artist_name, genre: genre, description: description, image_url: image_url, insta_url: insta_url, fb_url: fb_url, spotify_url: spotify_url, email: email, users_id: this.props.user.user_id})
+        .post('/artist/form', {artist_name: artist_name, genre: genre, description: description, image_url: image_url, insta_url: insta_url, fb_url: fb_url, spotify_url: spotify_url, email: email, users_id: this.props.match.params.id})
         .then(() => this.setState({redirect: true}))
         .catch(() => {alert('Artist form Unsuccessful')})
     }
 
     render() {
-        
-        console.log(this.props.user)
+        console.log(this.state)
+        // console.log(this.props.user)
         if(this.state.redirect) {
             alert('Congrats on joining bookr! Please login to continue!')
             return <Redirect to='/login' />
@@ -62,7 +62,16 @@ class ArtistForm extends Component {
         <FormGroup row>
           <Label for="examplePassword" sm={2}>Genre</Label>
           <Col sm={10}>
-            <Input name='genre' value={genre}onChange={this.handleChange}/>
+            <Input type='select' name='genre' value={genre}onChange={this.handleChange}>
+            <option value="" disabled selected hidden>Please Choose</option>
+            <option>Pop</option>
+            <option>Hip-Hop</option>
+            <option>R&B</option>
+            <option>DJ</option>
+            <option>Country</option>
+            <option>Rock</option>
+            <option>Speaker</option>
+            </Input>
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -85,7 +94,7 @@ class ArtistForm extends Component {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label for="exampleSelect" sm={2}>Instagram</Label>
+          <Label for="exampleSelect" sm={2}>Spotify</Label>
           <Col sm={10}>
             <Input type='url' name='spotify_url' value={spotify_url} onChange={this.handleChange}/>
           </Col>

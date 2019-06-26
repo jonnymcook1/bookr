@@ -19,12 +19,12 @@ module.exports = {
         const regUser = await db.addUser(username, hash)
 
         if(regUser[0]){
-            req.session.user = {
-                username: regUser[0].username,
-                user_id: regUser[0].user_id
-            }
-            console.log(req.session.user)
-            res.status(200).json(req.session.user)
+            // req.session.user = {
+            //     username: regUser[0].username,
+            //     user_id: regUser[0].user_id
+            // }
+            // console.log(req.session.user)
+            res.status(200).json(regUser[0].user_id)
         }
             
     },

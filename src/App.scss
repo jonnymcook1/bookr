@@ -1,0 +1,61 @@
+$font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+$primary-color: rgb(229, 236, 243);
+
+.header{
+  font-family: $font-stack;
+}
+
+
+#brand{
+    display: flex;
+    justify-content: center;
+    margin-left: 50%;
+    font-size: 25px;
+}
+
+#instaHead{
+    padding-right: 3px;
+}
+
+.landing {
+    background-image: url('https://images.unsplash.com/photo-1530522609140-ecba1c8f53a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60');
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-start ;
+    flex-direction: column;
+    align-items: center;
+    font-family: $font-stack;
+    font-size: 50px;
+    color: white;
+}
+
+#slogan {
+    font-size: 43px;
+    text-decoration: underline white;
+    padding-top: 5%;
+    color: white;
+}
+
+p{
+    font-family: $font-stack;
+    font-size: 25px;
+    color: white;
+}
+
+.featured{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.genreList{
+    margin: auto;
+}

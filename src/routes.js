@@ -12,7 +12,7 @@ export default (
         <Route exact path='/' component={Landing}/>
         <Route path='/login' component={Login} />
         <Route path='/register' component={Registration} />
-        <Route path='/artist/form' component={ArtistForm}  />
+        <Route path='/artist/form/:id' component={ArtistForm}  />
         <Route path='/dashboard/:id' component={Dashboard} />
         <Route path='/artist/:id' component={Profile} />
     </Switch>

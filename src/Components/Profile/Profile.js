@@ -14,7 +14,7 @@ class Profile extends Component {
 
     componentDidMount() {
         this.props.getArtist(this.props.match.params.id)
-        console.log(this.props.match.params)
+        console.log(this.props)
     }
 
     render() {

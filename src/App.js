@@ -1,7 +1,7 @@
 import React from 'react';
 import {HashRouter as Router} from 'react-router-dom'
 import './Reset.css'
-import './App.css';
+import './App.scss';
 import {Provider} from 'react-redux'
 import store from './redux/store'
 import routes from './routes';

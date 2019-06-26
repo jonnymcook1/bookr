@@ -61,9 +61,12 @@ class EventForm extends Component {
             <FormGroup>
               <Label for="type">Event Type</Label>
               <Input type="select" name="type" onChange={this.handleChange} id="examplePassword" placeholder="Choose type" >
-                <option>Select</option>
-                <option>Party</option>
+                <option value="" disabled selected hidden>Please Choose</option>
+                <option>Concert</option>
                 <option>Birthday</option>
+                <option>Charity Event</option>
+                <option>Speaking Event</option>
+                <option>Photoshoot</option>
               </Input>
             </FormGroup>
           </Col>

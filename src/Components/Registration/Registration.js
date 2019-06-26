@@ -9,6 +9,7 @@ class Registration extends Component {
         this.state = {
             username: '',
             password: '',
+            id: '',
             redirect: false,
         }
 
@@ -27,18 +28,20 @@ class Registration extends Component {
         this.setState({password: e.target.value})
     }
 
-    registerUser() {
+    registerUser(e) {
+        e.preventDefault()
         axios
         .post('/artist/register', {username: this.state.username, password: this.state.password})
-        .then(() => this.setState({redirect: true}))
+        .then((response) => this.setState({id: response.data, redirect: true }))
         .catch(() => {alert('Registration Unsuccessful')})
     }
 
     render() {
-
+        console.log(this.state)
         if(this.state.redirect){
             alert('Please fill out Artist form in to continue!')
-            return <Redirect to='/artist/form' />
+            return <Redirect to={`/artist/form/${this.state.id}`} />
+
         }
 
         return (
@@ -53,16 +56,9 @@ class Registration extends Component {
                         <Label for="examplePassword" className="mr-sm-2">Password</Label>
                         <Input type="password" onChange={this.handlePassword} />
                         </FormGroup>
-                        <Button onClick={this.registerUser} >Submit</Button>
+                        <Button onClick={(e) => this.registerUser(e)} >Submit</Button>
                     </Form>
                 </div>    
-                {/* // Username
-                // <input onChange={this.handleUsername} placeholder='Username' />
-                // <br/>
-                // Password: 
-                // <input onChange={this.handlePassword} placeholder='Password' type='password' />
-                // </div>
-                // <button onClick={this.registerUser}>Register</button> */}
             </div>
         )
     }

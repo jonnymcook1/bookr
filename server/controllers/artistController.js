@@ -11,17 +11,17 @@ module.exports = {
         const db = req.app.get('db')
         console.log(req.session.user)
 
-        
-        const user = await db.get_artist(req.session.user.user_id || req.query.id)
-        // console.log(req.query.id)
-        console.log(req.session.user)
-        // if(user){
-            // console.log(user[0])
-            return res.status(200).send(user) 
-
-        // else{
-        //     res.status(500).send({error:'Error'});
-        // }
+        console.log(req.query.id)
+        if(req.session.user){
+            const user = await db.get_artist(req.session.user.user_id || req.query.id)
+            return res.status(200).send(user)
+        }
+        else{
+            const user = await db.get_artist(req.query.id)
+            console.log(user)
+            return res.status(200).send(user)
+        }
+         
     },
 
     getGenre: (req, res) => {
