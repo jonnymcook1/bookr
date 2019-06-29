@@ -46,8 +46,10 @@ class Registration extends Component {
 
         return (
             <div className='register'>
-                <div>
-                    <Form inline>
+                <div className='registration'>
+                    <h2>Setup Username and Password</h2>
+                    <br/>
+                    <Form inline >
                         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="exampleEmail" className="mr-sm-2">Username</Label>
                         <Input type="text" onChange={this.handleUsername} />
@@ -56,6 +58,7 @@ class Registration extends Component {
                         <Label for="examplePassword" className="mr-sm-2">Password</Label>
                         <Input type="password" onChange={this.handlePassword} />
                         </FormGroup>
+                        
                         <Button onClick={(e) => this.registerUser(e)} >Submit</Button>
                     </Form>
                 </div>    

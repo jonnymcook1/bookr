@@ -92,7 +92,7 @@ class Header extends Component {
 
               }
               <Navbar color="light" light expand="md">
-                <NavbarBrand id='brand' href="/">bookr</NavbarBrand>
+                <NavbarBrand id='brand' href="/">bookr.</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
@@ -110,7 +110,7 @@ class Header extends Component {
                       <Modal isOpen={this.state.modal} toggleModal={this.toggleModal} className={this.props.className}>
                         <ModalHeader toggleModal={this.toggleModal}>Login to artist account</ModalHeader>
                         <ModalBody>
-                          <div>
+                          <div className='login'>
                           Username:
                           <input onChange={this.handleUsername} placeholder='Username' />
                           <br/>

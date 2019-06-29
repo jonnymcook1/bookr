@@ -8,23 +8,28 @@ module.exports = {
     },
 
     getArtist: async (req, res) => {
+        console.log(req.params)
         const db = req.app.get('db')
         console.log(req.session.user)
+        let artist_id = req.params.id
+        console.log(req.params.id)
+        // if(req.session.user){
+        //     const user = await db.get_artist(req.session.user.user_id || req.query.id)
+        //     return res.status(200).send(user)
+        // }
+        // else{
+        //     const user = await db.get_artist(req.query.id)
+        //     console.log(user)
+        //     return res.status(200).send(user)
+        // }
 
-        console.log(req.query.id)
-        if(req.session.user){
-            const user = await db.get_artist(req.session.user.user_id || req.query.id)
-            return res.status(200).send(user)
-        }
-        else{
-            const user = await db.get_artist(req.query.id)
-            console.log(user)
-            return res.status(200).send(user)
-        }
+        const artist = await db.get_artist(artist_id)
+        return res.status(200).json(artist)
          
     },
 
     getGenre: (req, res) => {
+        console.log(req.params)
         const db = req.app.get('db')
         const {genre} = req.params
 
