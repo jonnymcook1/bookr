@@ -86,7 +86,7 @@ class Dashboard extends Component {
                     <td>{artist.city},{artist.state}</td>
                     <td>{artist.event_date}/{artist.event_time}</td>
                     <td>${artist.booking_price}</td>
-                    <td>
+                    <td className='dashButtons'>
                         <Button onClick={() => this.acceptRequest(artist.event_id)}>Accept</Button>
                         <Button color='danger' onClick={() => this.deleteEvent(artist.event_id)}>Decline</Button>
                     </td>

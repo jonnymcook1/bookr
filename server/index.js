@@ -37,8 +37,8 @@ app.post('/artist/logout', logout)
 
 // Artist
 app.post('/artist/form', createArtist )
-app.get('/artist', getArtist)
-app.get('/artist/:genre', getGenre)
+app.get('/artist/:id', getArtist)
+app.get('/artist/genre/:genre', getGenre)
 
 // Event
 app.post('/event/form', createEvent)

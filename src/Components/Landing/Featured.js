@@ -15,7 +15,7 @@ class Featured extends Component {
 
     getGenre = (genre) => {
         axios
-        .get(`/artist/${genre}`)
+        .get(`/artist/genre/${genre}`)
         .then(response => {console.log(response.data)
             this.setState({genre: response.data})
         })
@@ -28,7 +28,8 @@ class Featured extends Component {
             return (
                 <ul className='featuredList' key={artist.artist_id}>
                     <img className='featuredPic' src={artist.image_url} alt='featuredPic'/>
-                    <Link to={`/artist/${artist.users_id}`}><Button>View Profile</Button></Link>
+                    <li className='featuredName'>{artist.artist_name}</li>
+                    <Link to={`/artist/${artist.artist_id}`}><Button>View Profile</Button></Link>
                 </ul>
             )
         })
@@ -36,15 +37,15 @@ class Featured extends Component {
             <div className='featured'>
                 <h1 className='header1'>Choose Genre to view Artist</h1>
                 <div className='genreList'>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('polka')}>polka</Button>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('hip-hop')}>Pop</Button>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('Pop')}>Pop</Button>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('Hip-Hop')}>Hip-Hop</Button>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('R&B')}>R&B</Button>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('DJ')}>DJ</Button>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('Country')}>Country</Button>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('Rock')}>Rock</Button>
-                    <Button color='outline-secondary' onClick={() => this.getGenre('Speaker')}>Speaker</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('polka')}>polka</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('hip-hop')}>Test</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Pop')}>Pop</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Hip-Hop')}>Hip-Hop</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('R&B')}>R&B</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('DJ')}>DJ</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Country')}>Country</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Rock')}>Rock</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Speaker')}>Speaker</Button>
                 </div>
                 <div>
                 {displayArtist}

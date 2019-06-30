@@ -12,6 +12,8 @@ function App() {
     <Provider store={store}>
         <Router>
           <div className="App">
+          <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
+          <link href="https://fonts.googleapis.com/css?family=Advent+Pro&display=swap" rel="stylesheet"/>
             <Header/>
             {routes}
           </div>

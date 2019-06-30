@@ -51,66 +51,67 @@ class ArtistForm extends Component {
         const {artist_name, genre, description, image_url, insta_url, spotify_url, email} = this.state
 
         return(
-            <div className='artist_form'>
+            <div className='artistForm'>
+              <h2 id='formText'>Fill out Artist Information to complete registration</h2>
                 <Form>
-        <FormGroup row>
-          <Label for="exampleEmail" sm={2}>Name</Label>
-          <Col sm={10}>
-            <Input type="text" name='artist_name' value={artist_name} onChange={this.handleChange} />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="examplePassword" sm={2}>Genre</Label>
-          <Col sm={10}>
-            <Input type='select' name='genre' value={genre}onChange={this.handleChange}>
-            <option value="" disabled selected hidden>Please Choose</option>
-            <option>Pop</option>
-            <option>Hip-Hop</option>
-            <option>R&B</option>
-            <option>DJ</option>
-            <option>Country</option>
-            <option>Rock</option>
-            <option>Speaker</option>
-            </Input>
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="exampleSelect" sm={2}>Artist Description</Label>
-          <Col sm={10}>
-            <Input type="textarea" name='description' value={description} onChange={this.handleChange}/>
-          </Col>
-        </FormGroup>
-        <img className='profilePic' src={image_url} alt='artist' />
-        <FormGroup row>
-          <Label for="exampleSelect" sm={2}>Upload Image</Label>
-          <Col sm={10}>
-            <Input type='url' name='image_url' value={image_url} onChange={this.handleChange}/>
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="exampleSelect" sm={2}>Instagram</Label>
-          <Col sm={10}>
-            <Input type="url" name='insta_url' value={insta_url} onChange={this.handleChange}/>
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="exampleSelect" sm={2}>Spotify</Label>
-          <Col sm={10}>
-            <Input type='url' name='spotify_url' value={spotify_url} onChange={this.handleChange}/>
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="exampleSelect" sm={2}>Email</Label>
-          <Col sm={10}>
-            <Input type='email' name='email' value={email} onChange={this.handleChange} />
-          </Col>
-        </FormGroup>
-        <FormGroup check row>
-          <Col sm={{ size: 10, offset: 5 }}>
-            <Button onClick={this.artistForm} >Submit</Button>
-          </Col>
-        </FormGroup>
-      </Form>
+                  <FormGroup row>
+                    <Label for="exampleEmail" sm={2}>Name</Label>
+                    <Col sm={10}>
+                      <Input type="text" name='artist_name' value={artist_name} onChange={this.handleChange} />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="examplePassword" sm={2}>Genre</Label>
+                    <Col sm={10}>
+                      <Input type='select' name='genre' value={genre}onChange={this.handleChange}>
+                      <option value="" disabled selected hidden>Please Choose</option>
+                      <option>Pop</option>
+                      <option>Hip-Hop</option>
+                      <option>R&B</option>
+                      <option>DJ</option>
+                      <option>Country</option>
+                      <option>Rock</option>
+                      <option>Speaker</option>
+                      </Input>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="exampleSelect" sm={2}>Artist Description</Label>
+                    <Col sm={10}>
+                      <Input type="textarea" name='description' value={description} onChange={this.handleChange}/>
+                    </Col>
+                  </FormGroup>
+                  <img className='formPic' src={image_url} alt='artist' />
+                  <FormGroup row>
+                    <Label for="exampleSelect" sm={2}>Upload Image</Label>
+                    <Col sm={10}>
+                      <Input type='url' name='image_url' value={image_url} onChange={this.handleChange}/>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="exampleSelect" sm={2}>Instagram</Label>
+                    <Col sm={10}>
+                      <Input type="url" name='insta_url' value={insta_url} onChange={this.handleChange}/>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="exampleSelect" sm={2}>Spotify</Label>
+                    <Col sm={10}>
+                      <Input type='url' name='spotify_url' value={spotify_url} onChange={this.handleChange}/>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="exampleSelect" sm={2}>Email</Label>
+                    <Col sm={10}>
+                      <Input type='email' name='email' value={email} onChange={this.handleChange} />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup check row>
+                    <Col sm={{ size: 10, offset: 5 }}>
+                      <Button onClick={this.artistForm} >Submit</Button>
+                    </Col>
+                  </FormGroup>
+                </Form>
             </div>
         )
     }

@@ -12,8 +12,10 @@ class Landing extends Component {
         return(
             <div>
               <div className='landing'>
+                <div id='welcome'>
                 <h2 id='slogan'>Where the show begins</h2>
                 <p>bookr</p>
+                </div>
               </div>
               <div>
                   <Featured/>
