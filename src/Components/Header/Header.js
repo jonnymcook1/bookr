@@ -32,6 +32,7 @@ class Header extends Component {
         this.logout=this.logout.bind(this)
         this.toggle = this.toggle.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.loggingIn = this.loggingIn.bind(this)
     }
     
     toggle() {
@@ -58,6 +59,7 @@ class Header extends Component {
         axios
         .post('/artist/login', {username: this.state.username, password: this.state.password})
         .then(() => {this.setState({modal: !this.state.modal})
+        this.setState({loggingIn: true})
         this.setState({login: !this.state.login})})
         .then(() => {this.props.getUser()})
         .catch(err => {alert(err, 'login Unsuccessful')})
@@ -76,6 +78,14 @@ class Header extends Component {
       .then(() => {this.props.history.push('/')})
     }
 
+    loggingIn() {
+      if(this.state.loggingIn){
+        // this.setState({loggingIn: false})
+        return true
+      }
+      return false
+    }
+
     render() {
       console.log(this.props.user)
       const {login} = this.state
@@ -83,7 +93,7 @@ class Header extends Component {
 
         return (
           <div className='header'>
-              {this.props.user.user_id ?
+              {this.props.user.user_id && this.loggingIn() ?
                 <>
                   <Redirect to={`/dashboard/${this.props.user.user_id}`} />
                 </>

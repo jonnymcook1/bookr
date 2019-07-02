@@ -6,15 +6,35 @@ class Shows extends Component {
     constructor(props){
         super(props)
         this.state = {
+          shows: []
         }
     }
 
     componentDidMount() {
+      console.log(this.props)
+      this.refreshList(this.props.id);
     }
     
+    refreshList(id) {
+       console.log(id)
+       console.log(typeof id)
+      axios
+      .get(`/shows/${id}`)
+      .then(response => {console.log(response.data)
+        this.setState({shows: response.data})
+      })
+    }
+
+    componentDidUpdate(prevProps) {
+      console.log(this.props)
+      if(prevProps !== this.props) {
+        this.refreshList();
+      }
+    }
+
     render() {
       console.log(this.props.id)
-      let {shows} = this.props
+      let {shows} = this.state
       let displayShows = shows.map(show => {
         return(
           <tr key={show.artist_id}>

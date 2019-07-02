@@ -66,7 +66,7 @@ class Dashboard extends Component {
         console.log(id)
         console.log(typeof id)
        axios
-       .get(`/shows/${13}`)
+       .get(`/shows/${this.props.match.params.id}`)
        .then(response => {console.log(response.data)
          this.setState({shows: response.data})
        })
