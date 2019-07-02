@@ -23,7 +23,8 @@ class Header extends Component {
           password: '',
           isOpen: false,
           modal: false,
-          login: false
+          login: true,
+          redirect: false
         }
 
         this.handleUsername=this.handleUsername.bind(this)
@@ -32,7 +33,7 @@ class Header extends Component {
         this.logout=this.logout.bind(this)
         this.toggle = this.toggle.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
-        this.loggingIn = this.loggingIn.bind(this)
+        // this.loggingIn = this.loggingIn.bind(this)
     }
     
     toggle() {
@@ -59,9 +60,12 @@ class Header extends Component {
         axios
         .post('/artist/login', {username: this.state.username, password: this.state.password})
         .then(() => {this.setState({modal: !this.state.modal})
-        this.setState({loggingIn: true})
+        // this.setState({loggingIn: true})
         this.setState({login: !this.state.login})})
-        .then(() => {this.props.getUser()})
+        .then(() => {
+          this.props.getUser().then(() => this.props.history.push(`/dashboard/${this.props.user.user_id}`)
+          )
+        })
         .catch(err => {alert(err, 'login Unsuccessful')})
     }
     
@@ -78,45 +82,42 @@ class Header extends Component {
       .then(() => {this.props.history.push('/')})
     }
 
-    loggingIn() {
-      if(this.state.loggingIn){
-        // this.setState({loggingIn: false})
-        return true
-      }
-      return false
+    componentDidMount(){
+      this.props.getUser().then(() => !this.props.user.user_id ? this.setState({redirect: true}) : null )
     }
 
     render() {
       console.log(this.props.user)
-      const {login} = this.state
+      const {redirect} = this.state
 
 
         return (
           <div className='header'>
-              {this.props.user.user_id && this.loggingIn() ?
+              {redirect?
                 <>
-                  <Redirect to={`/dashboard/${this.props.user.user_id}`} />
+                  {/* <Redirect to={`/dashboard/${this.props.user.user_id}`} /> */}
+                  {<Redirect to='/'/>}
                 </>
                 :
-               <Redirect to='/'/>
+                <></>
 
               }
               <Navbar color="light" light expand="md">
-                <NavbarBrand id='brand' href="/">bookr.</NavbarBrand>
+                <NavbarBrand id='brand' href="/">bookr</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem id='instaHead' ><SocialIcon url='https://www.instagram.com/johncook1/' style={{ height: 25, width: 25 }} bgColor="#6c757d"/></NavItem>
                     <NavItem id='fbHead' ><SocialIcon url='https://www.facebook.com/profile.php?id=100006264817028' style={{ height: 25, width: 25 }} bgColor="#6c757d"/></NavItem>
                     <NavItem>
-                      {login ? (
+                      {redirect? (
                         null
                         ) : (
                         <Link to='/register'><NavLink>Artist Registration</NavLink></Link>
                       )}
                     </NavItem>
                     <NavItem>
-                      {login ? (
+                      {redirect? (
                         <Button color="secondary" onClick={this.logout}>Logout</Button>
                         ) : (
                         <Button color="secondary" onClick={this.toggleModal}>{this.props.buttonLabel}Login</Button>

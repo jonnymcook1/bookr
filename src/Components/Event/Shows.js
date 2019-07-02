@@ -12,29 +12,20 @@ class Shows extends Component {
 
     componentDidMount() {
       console.log(this.props)
-      this.refreshList(this.props.id);
+      this.List(this.props.id);
     }
     
-    refreshList(id) {
-       console.log(id)
-       console.log(typeof id)
+    List() {
       axios
-      .get(`/shows/${id}`)
+      .get(`/shows/${this.props.id}`)
       .then(response => {console.log(response.data)
-        this.setState({shows: response.data})
+        this.props.updateShows(response.data)
       })
-    }
-
-    componentDidUpdate(prevProps) {
-      console.log(this.props)
-      if(prevProps !== this.props) {
-        this.refreshList();
-      }
     }
 
     render() {
       console.log(this.props.id)
-      let {shows} = this.state
+      let {shows} = this.props
       let displayShows = shows.map(show => {
         return(
           <tr key={show.artist_id}>
@@ -50,21 +41,21 @@ class Shows extends Component {
         return(
             <div className='shows'>
                 <h4 className='showsHeader'>Upcoming Shows</h4>
-                 <Table dark>
-        <thead>
-          <tr>
-            <th id='th'>Event</th>
-            <th id='th'>Venue</th>
-            <th id='th'>Date/Time</th>
-            <th id='th'>Location</th>
-            <th id='th'>Duration</th>
-            <th id='th'>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayShows}
-        </tbody>
-      </Table>
+                <Table dark>
+                  <thead>
+                    <tr>
+                      <th id='th'>Event</th>
+                      <th id='th'>Venue</th>
+                      <th id='th'>Date/Time</th>
+                      <th id='th'>Location</th>
+                      <th id='th'>Duration</th>
+                      <th id='th'>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {displayShows}
+                  </tbody>
+                </Table>
             </div>
         )
     }

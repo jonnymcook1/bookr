@@ -22,19 +22,24 @@ class Dashboard extends Component {
             user_id: 0
         
         }
+        this.updateShows = this.updateShows.bind(this)
     }
 
-    componentDidMount(user_id) {
-        console.log(user_id)
+    componentDidMount() {
+        // console.log(user_id)
         this.refreshList()
         this.props.getUser()
         console.log(this.props.user)
         axios
-            .get(`/dashboard/${user_id}`)
+            .get(`/dashboard/${this.props.match.params.id}`)
             .then(response => {
-                console.log(user_id)
+                // console.log(user_id)
                 console.log(response.data)
-                this.setState({user: response.data})
+                this.setState({user: response.data}, () => {
+                    if(!this.state.user) {
+                        this.setState({redirect: true});
+                    }
+                })
             })
     }
 
@@ -46,8 +51,8 @@ class Dashboard extends Component {
         .then((res) => 
         {console.log(res.data)
         this.setState({updateShows: !this.state.updateShows, user: res.data},() => {
-                this.artist()
                 this.refreshList()
+                this.artist()
             })
         })
         .catch(err => {alert(err, 'Not accepted')})    
@@ -72,9 +77,13 @@ class Dashboard extends Component {
        })
      }
 
-    artist(user_id) {
+     updateShows(array){
+         this.setState({shows: array})
+     }
+
+    artist() {
         axios
-        .get(`/dashboard/${user_id}`)
+        .get(`/dashboard/${this.props.match.params.id}`)
         .then(response => {
             console.log(response.data)
             this.setState({user: response.data})
@@ -84,9 +93,7 @@ class Dashboard extends Component {
     render() {
         console.log(this.props)
 
-        if(!this.state.user) {
-            this.setState({redirect: true});
-        }
+
         if(this.state.redirect) {
             alert('Please login')
             return <Redirect to='/' />
@@ -129,7 +136,7 @@ class Dashboard extends Component {
                     </tbody>
                 </Table>
                 <br/>
-                <Shows shows={this.state.shows} toRefresh={this.state.updateShows} id={this.props.match.params.id}/>
+                <Shows shows={this.state.shows} id={this.props.match.params.id} updateShows={this.updateShows}/>
             </div>
         )
     }

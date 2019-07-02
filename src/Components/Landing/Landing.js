@@ -14,7 +14,7 @@ class Landing extends Component {
               <div className='landing'>
                 <div id='welcome'>
                 <h2 id='slogan'>Where the show begins</h2>
-                <p>bookr</p>
+                <p>bookr brings fans and artist together</p>
                 </div>
               </div>
               <div>

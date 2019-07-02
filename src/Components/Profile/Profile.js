@@ -9,13 +9,19 @@ class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            shows: []
         }
+
+    this.updateShows = this.updateShows.bind(this)
     }
 
     componentDidMount() {
         this.props.getArtist(this.props.match.params.id)
         console.log(this.props)
+    }
+
+    updateShows(array){
+        this.setState({shows: array})
     }
 
     render() {
@@ -33,7 +39,7 @@ class Profile extends Component {
                     </div>
                 </div>
                 <div className='shows'>
-                    <Shows id={this.props.match.params.id} />
+                    <Shows id={this.props.match.params.id} shows={this.state.shows} updateShows={this.updateShows}/>
                 </div>
                 <br/>
                 <div id='eventForm'>

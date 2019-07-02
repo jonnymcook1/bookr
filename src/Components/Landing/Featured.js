@@ -37,14 +37,13 @@ class Featured extends Component {
             <div className='featured'>
                 <h1 className='header1'>Choose Genre to view Artist</h1>
                 <div className='genreList'>
-                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('polka')}>polka</Button>
-                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('hip-hop')}>Test</Button>
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Pop')}>Pop</Button>
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Hip-Hop')}>Hip-Hop</Button>
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('R&B')}>R&B</Button>
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('DJ')}>DJ</Button>
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Country')}>Country</Button>
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Rock')}>Rock</Button>
+                    <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Comedy')}>Comedy</Button>
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Speaker')}>Speaker</Button>
                 </div>
                 <div id='artistDisplay'>

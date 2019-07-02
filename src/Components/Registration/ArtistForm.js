@@ -71,6 +71,7 @@ class ArtistForm extends Component {
                       <option>DJ</option>
                       <option>Country</option>
                       <option>Rock</option>
+                      <option>Comedy</option>
                       <option>Speaker</option>
                       </Input>
                     </Col>
