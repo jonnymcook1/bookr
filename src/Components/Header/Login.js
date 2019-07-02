@@ -39,7 +39,7 @@ class Login extends Component {
         console.log(this.props)
         if(this.state.redirect){
             alert('Login successful!')
-            return <Redirect to='/dashboard' />
+            return <Redirect to={`/dashboard/${this.props.user.user_id}`} />
         }
         return (
             <div className='login'>

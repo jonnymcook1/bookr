@@ -28,6 +28,21 @@ module.exports = {
          
     },
 
+    getDash: async (req, res) => {
+        const db = req.app.get('db')
+        let user_id = req.params.id
+        if (req.session.user){
+            const artist = await db.dash(req.session.user.user_id) 
+
+            return res.status(200).json(artist)
+
+        } else {
+            const artist = await db.dash(user_id)
+            return res.status(200).send(artist)
+        }
+
+    },
+
     getGenre: (req, res) => {
         console.log(req.params)
         const db = req.app.get('db')

@@ -3,7 +3,7 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const {registerUser, loginUser, getUser, logout} = require('./controllers/authController')
-const {createArtist, getArtist, getGenre} = require('./controllers/artistController')
+const {createArtist, getArtist, getGenre, getDash} = require('./controllers/artistController')
 const {createEvent, getEvent, acceptedEvent, deleteEvent, getShow} = require('./controllers/eventController')
 
 const app = express()
@@ -39,13 +39,14 @@ app.post('/artist/logout', logout)
 app.post('/artist/form', createArtist )
 app.get('/artist/:id', getArtist)
 app.get('/artist/genre/:genre', getGenre)
+app.get('/dashboard/:id', getDash)
 
 // Event
 app.post('/event/form', createEvent)
 app.put('/event/accepted/:event_id', acceptedEvent)
 app.delete('/event/delete/:id', deleteEvent)
 app.get('/event/request/:id', getEvent)
-app.get('/shows', getShow)
+app.get('/shows/:id', getShow)
 
 
 app.listen(SERVER_PORT, () => {

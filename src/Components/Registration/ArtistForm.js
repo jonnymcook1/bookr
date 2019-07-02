@@ -108,7 +108,7 @@ class ArtistForm extends Component {
                   </FormGroup>
                   <FormGroup check row>
                     <Col sm={{ size: 10, offset: 5 }}>
-                      <Button onClick={this.artistForm} >Submit</Button>
+                      <Button className='formButton' onClick={this.artistForm} >Submit</Button>
                     </Col>
                   </FormGroup>
                 </Form>

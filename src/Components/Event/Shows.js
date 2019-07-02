@@ -3,32 +3,18 @@ import { Table } from 'reactstrap';
 import axios from 'axios';
 
 class Shows extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
-          shows: []
         }
     }
 
     componentDidMount() {
-      this.refreshList();
     }
     
-    refreshList() {
-      axios
-      .get('/shows')
-      .then(response => {console.log(response.data)
-        this.setState({shows: response.data})
-      })
-    }
-
-    componentDidUpdate(prevProps) {
-      if(prevProps !== this.props) {
-        this.refreshList();
-      }
-    }
     render() {
-      let {shows} = this.state
+      console.log(this.props.id)
+      let {shows} = this.props
       let displayShows = shows.map(show => {
         return(
           <tr key={show.artist_id}>
@@ -43,16 +29,16 @@ class Shows extends Component {
       })
         return(
             <div className='shows'>
-                <h4>Upcoming Shows</h4>
+                <h4 className='showsHeader'>Upcoming Shows</h4>
                  <Table dark>
         <thead>
           <tr>
-            <th>Event</th>
-            <th>Venue</th>
-            <th>Date/Time</th>
-            <th>Location</th>
-            <th>Duration</th>
-            <th>Description</th>
+            <th id='th'>Event</th>
+            <th id='th'>Venue</th>
+            <th id='th'>Date/Time</th>
+            <th id='th'>Location</th>
+            <th id='th'>Duration</th>
+            <th id='th'>Description</th>
           </tr>
         </thead>
         <tbody>

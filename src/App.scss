@@ -3,34 +3,52 @@ $primary-color: rgb(229, 236, 243);
 
 // Header
 
-.header{
+.header {
   font-family: $font-stack;
 }
 
-#brand{
-    font-family: 'Advent Pro', sans-serif;
+@media (max-width: 600px) {
+    .header{
+        width: 100vw
+    }
+}
+
+#brand {
+    font-family: 'Kanit', sans-serif;
     font-size: 25px;
 }
 
-#instaHead{
+#instaHead {
     padding-right: 3px;
+    padding-top: 6px;
 }
 
-.login{
+#fbHead {
+    padding-right: 8px;
+    padding-top: 6px;
+}
+
+.login {
     display: flex;
+    font-family: $font-stack;
     flex-direction: column;
     align-items: center;
+}
+
+.modal {
+    font-family: $font-stack;
 }
 
 
 // Landing/Featured
 
 .landing {
-    background-image: url('https://images.unsplash.com/photo-1530522609140-ecba1c8f53a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60');
+    background-image: url('https://images.unsplash.com/photo-1530522609140-ecba1c8f53a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');
+    background-size: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: black;
-    width: 99vw;
-    height: 99vh;
+    width: 100vw;
+    height: 80vh;
     background-size: cover;
     position: relative;
     z-index: -1;
@@ -38,69 +56,164 @@ $primary-color: rgb(229, 236, 243);
     justify-content: flex-start ;
     flex-direction: column;
     align-items: center;
-    font-family: $font-stack;
+    font-family: 'Arimo', sans-serif;
     font-size: 50px;
     color: white;
 }
 
-#welcome{
+@media (max-width: 600px) {
+    .landing{
+        background-size: 110%;
+        height: 30vh;
+        width: 100vw;
+    }
+}
+
+#welcome {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 #slogan {
-    font-size: 40px;
-    border-bottom: 100px white !important;
-    padding-top: 5%;
+    font-family: 'Kanit', sans-serif;
+    font-size: 50px;
+    border-bottom: 3px white solid !important;
+    padding-top: 10%;
     color: white;
 }
 
-p{
+@media (max-width: 600px) {
+    #slogan{
+        padding-top: 10%;
+        font-size: 25px;
+    }
+}
+
+p {
     font-family: $font-stack;
     font-size: 25px;
     color: white;
 }
 
-.featured{
+@media (max-width: 600px) {
+    p{
+        font-size: 20px;
+    }
+}
+
+// Featured
+
+.featured {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     margin-top: 30px;
     margin-bottom: 30px;
-    font-family: $font-stack
+    font-family: $font-stack;
+    font-size: 40px
 }
 
-.genreList{
-    margin: 10px;
+
+@media (max-width: 600px) {
+    .header1{
+        font-size: 27px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.genreList {
+    display: flex;
+    flex-wrap: wrap;
+    // flex-direction: column;
+    align-items: center;
+    // margin-left: 25px;
+    margin-bottom: 30px;
+    border-bottom: 1px slategray solid;
+}
+
+@media (max-width: 600px) {
+    .genreList {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        margin-bottom: 20px;
+        margin-left: 25px;
+        border-bottom: transparent !important
+    }
 }
 
 .b1{
     margin: .75em;
 }
 
+@media (max-width: 600px) {
+    .b1 {
+        font-size: 12px !important;
+        margin: .5em;
+    }
+}
+
 .featuredList {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
 }
 
-.featuredPic{
+@media (max-width: 600px) {
+    .featuredList {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px slategray solid
+    }
+}
+
+.featuredPic {
     width: 30vw;
     height: 60vh;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+@media (max-width: 600px) {
+    .featuredPic {
+        width: 60vw;
+        height: 40vh;
+    }
+}
+
 .featuredName {
     font-size: 14px bold;
-    margin: 10px;
+    margin: 1px;
+}
+
+#artistDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 45px
+}
+
+@media (max-width: 600px) {
+    #artistDisplay {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 
 // Profile
 
-.profile{
+.profile {
+    font-family: $font-stack;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -110,36 +223,49 @@ p{
 
 }
 
+@media (max-width: 600px) {
+    .eventHeader{
+        font-size: 25px;
+    }
+}
+
 .info {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.artistInfo{
+.artistInfo {
     margin-bottom: 1%;
 }
 
-.profileName{
+.profileName {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.profilePic{
+.profilePic {
     width: 40vw;
     height: 60vh;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.description{
+@media (max-width: 600px) {
+    .profilePic {
+        width: 60vw;
+        height: 40vh;
+    }
+}
+
+.description {
     border: 1px, black;
     // margin-left: 40%;
     margin-top: 3%;
 }
 
-#eventForm{
+#eventForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -147,16 +273,91 @@ p{
     margin-bottom: 30px;
 }
 
+@media (max-width: 600px) {
+    #eventForm {
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+    }
+}
+
 // Dashboard
 
-.dashboard  {
+.dashboard {
     font-family: $font-stack;
-    margin-top: 15px
+    margin-top: 15px;
+    margin-bottom: 40px;
+}
+
+#dashWelcome {
+    margin-left: 35%;
+    font-family: 'Kanit', sans-serif;
+}
+
+@media (max-width: 600px) {
+    #dashWelcome {
+        font-size: 20px;
+        margin-left: 90px;
+    }
 }
 
 .dashButtons {
     display: flex;
     justify-content: space-evenly;
+}
+
+#th {
+    // padding-left: 40px
+}
+
+#th1 {
+    padding-left: 75px !important;
+}
+
+@media (max-width: 600px) {
+    #th {
+        font-size: 10px;
+        // padding-left: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    #th1 {
+        font-size: 10px;
+        padding: 12px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    td {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    #accepted {
+        font-size: 8px;
+        padding: 0px;
+        width: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    #decline {
+        font-size: 10px;
+        padding: 0px;
+        width: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashButtons {
+        display: flex;
+        flex-direction: column;
+        margin-left: 7px
+    }
 }
 
 // Registration
@@ -167,6 +368,27 @@ p{
     align-items: center;
     font-family: $font-stack;
     margin: 30px;
+}
+
+@media (max-width: 600px) {
+    .regForm {
+        display: block  !important;
+        align-content: center !important;
+    }
+}
+
+@media (max-width: 600px) {
+    h2 {
+        font-size: 22px !important
+    }
+}
+
+
+@media (max-width: 600px) {
+    .regButton {
+        margin-top: 10px;
+        margin-left: 75px;
+    }
 }
 
 // Artist Form
@@ -181,11 +403,21 @@ p{
     margin-top: 3%;
 }
 
-#formText{
+@media (max-width: 600px) {
+    .formButton {
+        margin-left: 95px;
+    }
+}
+
+#formText {
     display: flex;
     align-items: center;
 }
 
-.formPic{
+.formPic {
     display: none;
 }
+
+
+
+

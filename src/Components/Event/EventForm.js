@@ -43,6 +43,7 @@ class EventForm extends Component {
       axios
       .post('/event/form', {event_name: name, event_type: type, event_date: date, event_time: time, event_duration: duration, event_description: description, venue_name: venue, address: address, city: city, state: state, zip_code: zip, booking_price: price, artist_id: this.props.artist[0].artist_id})
       .then(res => {console.log(res.data)})
+      .then(() => {alert('Thank you for your request! please check back to see if your event was accepted')})
       .catch(() => {alert('Please complete form to continue')})
   }
 

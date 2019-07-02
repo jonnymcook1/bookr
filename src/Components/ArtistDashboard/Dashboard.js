@@ -10,40 +10,47 @@ import axios from 'axios'
 
 
 class Dashboard extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             updateShows: true,
             redirect: false,
             user: [],
             artist: [],
             accepted: false,
-            
+            shows: [],
+            user_id: 0
+        
         }
     }
 
-
-
-    componentDidMount() {
+    componentDidMount(user_id) {
+        console.log(user_id)
+        this.refreshList()
         this.props.getUser()
         console.log(this.props.user)
         axios
-            .get('/artist')
+            .get(`/dashboard/${user_id}`)
             .then(response => {
+                console.log(user_id)
                 console.log(response.data)
-                this.setState({artist: response.data})
+                this.setState({user: response.data})
             })
     }
 
     acceptRequest(event_id) {
-        this.setState({accepted: !this.state.accepted, updateShows: !this.state.updateShows },() => {
-            console.log(event_id)
-            axios
-            .put(`/event/accepted/${event_id}`, {accepted: this.state.accepted})
-            .then((res) => {console.log(res.data)
-                this.artist()})
-            .catch(err => {alert(err, 'Not accepted')})    
+        console.log(this.state.accepted)
+        console.log(event_id)
+        axios
+        .put(`/event/accepted/${event_id}`, {accepted: !this.state.accepted})
+        .then((res) => 
+        {console.log(res.data)
+        this.setState({updateShows: !this.state.updateShows, user: res.data},() => {
+                this.artist()
+                this.refreshList()
+            })
         })
+        .catch(err => {alert(err, 'Not accepted')})    
     }
 
     deleteEvent(event_id) {
@@ -55,16 +62,24 @@ class Dashboard extends Component {
         .catch(err => {alert(err, 'Did not Delete')})
     }
 
-    artist() {
+    refreshList(id) {
+        console.log(id)
+        console.log(typeof id)
+       axios
+       .get(`/shows/${13}`)
+       .then(response => {console.log(response.data)
+         this.setState({shows: response.data})
+       })
+     }
+
+    artist(user_id) {
         axios
-        .get('/artist')
+        .get(`/dashboard/${user_id}`)
         .then(response => {
             console.log(response.data)
-            this.setState({artist: response.data})
+            this.setState({user: response.data})
         })
     }
- 
-
 
     render() {
         console.log(this.props)
@@ -77,18 +92,18 @@ class Dashboard extends Component {
             return <Redirect to='/' />
         }
 
-        let {artist} = this.state
-        let displayRequest = artist.map(artist => {
+        let {user} = this.state
+        let displayRequest = user.map(user => {
             return (
-                <tr key={artist.artist_id}>
-                    <td>{artist.event_name}</td>
-                    <td>{artist.venue_name}</td>
-                    <td>{artist.city},{artist.state}</td>
-                    <td>{artist.event_date}/{artist.event_time}</td>
-                    <td>${artist.booking_price}</td>
+                <tr key={user.artist_id}>
+                    <td>{user.event_name}</td>
+                    <td>{user.venue_name}</td>
+                    <td>{user.city},{user.state}</td>
+                    <td>{user.event_date} / {user.event_time}</td>
+                    <td>${user.booking_price}</td>
                     <td className='dashButtons'>
-                        <Button onClick={() => this.acceptRequest(artist.event_id)}>Accept</Button>
-                        <Button color='danger' onClick={() => this.deleteEvent(artist.event_id)}>Decline</Button>
+                        <Button id='accepted' onClick={() => this.acceptRequest(user.event_id)}>Accept</Button>
+                        <Button id='decline' color='danger' onClick={() => this.deleteEvent(user.event_id)}>Decline</Button>
                     </td>
                 </tr>
             )
@@ -96,16 +111,17 @@ class Dashboard extends Component {
 
         return (
             <div className='dashboard'>
+                <h3 id='dashWelcome'>Welcome to your Dashboard {user.artist_name}</h3>
             <h4>Event Request</h4>
                 <Table dark>
                     <thead>
                     <tr>
-                        <th>Event</th>  
-                        <th>Venue</th>
-                        <th>Location</th>
-                        <th>Date/Time</th>
-                        <th>Offer</th>
-                        <th>Accept/Decline</th>
+                        <th id='th'>Event</th>  
+                        <th id='th'>Venue</th>
+                        <th id='th'>Location</th>
+                        <th id='th'>Date/Time</th>
+                        <th id='th'>Offer</th>
+                        <th id='th1'>Accept/Decline</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -113,7 +129,7 @@ class Dashboard extends Component {
                     </tbody>
                 </Table>
                 <br/>
-                <Shows toRefresh={this.state.updateShows}/>
+                <Shows shows={this.state.shows} toRefresh={this.state.updateShows} id={this.props.match.params.id}/>
             </div>
         )
     }

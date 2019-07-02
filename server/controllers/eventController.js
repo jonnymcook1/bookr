@@ -36,11 +36,25 @@ module.exports = {
     },
 
     getShow: (req, res) => {
+        console.log(req.params)
         const db = req.app.get('db')
-
-        db.get_show()
-            .then(response => res.status(200).json(response))
-            .catch(error => res.status(500).send(`getShow: ${error}`))
+        const {id} = req.params
+        if(req.session.user) {
+            if(+id === req.session.user.user_id) {
+                db.get_show_user(+id)
+                .then(response => res.status(200).json(response))
+                .catch(error => res.status(500).send(`getShow: ${error}`))
+            } else {
+                db.get_show_artist(+id)
+                .then(response => res.status(200).json(response))
+                .catch(error => res.status(500).send(`getShow: ${error}`))
+            }
+        }
+        else {
+        db.get_show_artist(+id)
+        .then(response => res.status(200).json(response))
+        .catch(error => res.status(500).send(`getShow: ${error}`))
+    }
     }
 
 }

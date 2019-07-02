@@ -47,7 +47,7 @@ class Featured extends Component {
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Rock')}>Rock</Button>
                     <Button className='b1' color='outline-secondary' onClick={() => this.getGenre('Speaker')}>Speaker</Button>
                 </div>
-                <div>
+                <div id='artistDisplay'>
                 {displayArtist}
                 </div>
             </div>

@@ -46,7 +46,7 @@ module.exports = {
             } else {
                  req.session.user = {
                     username: user[0].username,
-                    user_id: user[0].user_id,
+                    user_id: user[0].user_id
                     // event: event[0] ? event[0].event_id : null
                 }
                 res.status(200).json(req.session.user)

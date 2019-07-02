@@ -99,7 +99,11 @@ class Header extends Component {
                     <NavItem id='instaHead' ><SocialIcon url='https://www.instagram.com/johncook1/' style={{ height: 25, width: 25 }} bgColor="#6c757d"/></NavItem>
                     <NavItem id='fbHead' ><SocialIcon url='https://www.facebook.com/profile.php?id=100006264817028' style={{ height: 25, width: 25 }} bgColor="#6c757d"/></NavItem>
                     <NavItem>
-                      <Link to='/register'><NavLink>Artist Registration</NavLink></Link>
+                      {login ? (
+                        null
+                        ) : (
+                        <Link to='/register'><NavLink>Artist Registration</NavLink></Link>
+                      )}
                     </NavItem>
                     <NavItem>
                       {login ? (

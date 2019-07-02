@@ -6,8 +6,8 @@ import Shows from '../Event/Shows';
 // import axios from 'axios';
 
 class Profile extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
 
         }
@@ -32,12 +32,12 @@ class Profile extends Component {
                     <h2 className='description'>{this.props.artist[0].description}</h2>
                     </div>
                 </div>
-                <div>
-                    <Shows/>
+                <div className='shows'>
+                    <Shows id={this.props.match.params.id} />
                 </div>
                 <br/>
-                <div>
-                    <h2>Please fill out form to book {this.props.artist[0].artist_name}</h2>
+                <div id='eventForm'>
+                    <h2 className='eventHeader'>Please fill out form to book {this.props.artist[0].artist_name}</h2>
                     <EventForm id='eventForm' artist={this.props.artist[0]} />
                 </div>
             </div>
