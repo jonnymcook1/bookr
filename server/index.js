@@ -10,6 +10,8 @@ const app = express()
 
 let {SERVER_PORT, SESSION_SECRET}= process.env
 
+app.use( express.static( `${__dirname}/../build` ) );
+
 app.use(express.json())
 
 massive(process.env.CONNECTION_STRING).then(db => {

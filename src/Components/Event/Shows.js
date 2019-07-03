@@ -48,7 +48,7 @@ class Shows extends Component {
                       <th id='th'>Venue</th>
                       <th id='th'>Date/Time</th>
                       <th id='th'>Location</th>
-                      <th id='th'>Duration</th>
+                      <th id='th'>Duration(hrs)</th>
                       <th id='th'>Description</th>
                     </tr>
                   </thead>
