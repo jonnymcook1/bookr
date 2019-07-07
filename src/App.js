@@ -14,7 +14,6 @@ function App() {
           <div className="App">
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
           <link href="https://fonts.googleapis.com/css?family=Kanit:900i&display=swap" rel="stylesheet"></link>
-          {/* <link href="https://fonts.googleapis.com/css?family=Roboto:900i&display=swap" rel="stylesheet"/> */}
           <link href="https://fonts.googleapis.com/css?family=Advent+Pro&display=swap" rel="stylesheet"/>
           <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet"/>
             <Header/>
