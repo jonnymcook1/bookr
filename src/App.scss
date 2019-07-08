@@ -225,6 +225,10 @@ p {
 
 }
 
+.eventHeader {
+    font-size: 50px
+}
+
 @media (max-width: 600px) {
     .eventHeader{
         font-size: 25px;
@@ -283,9 +287,6 @@ p {
     }
 }
 
-@media (max-width: 600px) {
-    
-}
 
 #eventForm {
     display: flex;
