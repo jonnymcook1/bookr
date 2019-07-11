@@ -48,7 +48,6 @@ table {
 }
 
 
-
 $font-stack: 'Roboto', sans-serif;
 $primary-color: rgb(229, 236, 243);
 
@@ -126,6 +125,12 @@ $primary-color: rgb(229, 236, 243);
     align-items: center;
 }
 
+h2 {
+    margin-bottom: .5rem !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+}
+
 #slogan {
     font-family: 'Kanit', sans-serif;
     font-size: 50px;
@@ -145,6 +150,8 @@ p {
     font-family: $font-stack;
     font-size: 25px;
     color: white;
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
 }
 
 @media (max-width: 600px) {
@@ -214,8 +221,11 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 40px;
+    margin-right: 40px !important;
+    margin-block-start: .5em !important;
+   
 }
+
 
 @media (max-width: 600px) {
     .featuredList {
